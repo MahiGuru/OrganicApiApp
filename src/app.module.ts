@@ -37,8 +37,10 @@ import { WithdrawsModule } from './withdraws/withdraws.module';
 import { StoreNoticesModule } from './store-notices/store-notices.module';
 import { ConversationsModule } from './conversations/conversations.module';
 import { AiModule } from './ai/ai.module';
+import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017',{dbName: 'bharatam-food'}),
     ConfigModule.forRoot(),
     StripeModule.forRoot({
       apiKey: process.env.STRIPE_API_KEY,
