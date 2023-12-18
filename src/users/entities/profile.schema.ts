@@ -6,7 +6,7 @@ import { CoreEntitySchema } from 'src/common/entities/core.schema';
 
 @Schema()
 export class Profile extends CoreEntitySchema {
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   avatar?: AttachmentSchema;
 
   @Prop()

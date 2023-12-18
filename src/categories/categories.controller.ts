@@ -12,6 +12,7 @@ import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { GetCategoriesDto } from './dto/get-categories.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import mongoose from 'mongoose';
 
 @Controller('categories')
 export class CategoriesController {
@@ -34,14 +35,14 @@ export class CategoriesController {
 
   @Put(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: mongoose.Schema.Types.ObjectId,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
-    return this.categoriesService.update(+id, updateCategoryDto);
+    return this.categoriesService.update(id, updateCategoryDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoriesService.remove(+id);
+  remove(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.categoriesService.remove(id);
   }
 }

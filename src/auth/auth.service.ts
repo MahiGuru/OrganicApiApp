@@ -18,20 +18,24 @@ import { v4 as uuidv4 } from 'uuid';
 import { plainToClass } from 'class-transformer';
 import { User } from 'src/users/entities/user.entity';
 import usersJson from '@db/users.json';
+import { UsersService } from 'src/users/users.service';
 const users = plainToClass(User, usersJson);
 
 @Injectable()
 export class AuthService {
+  constructor(private userService: UsersService) {}
   private users: User[] = users;
   async register(createUserInput: RegisterDto): Promise<AuthResponse> {
-    const user: User = {
+
+    console.log("USER INPUT ", createUserInput);
+    const user: any = {
       id: uuidv4(),
       ...users[0],
       ...createUserInput,
       created_at: new Date(),
       updated_at: new Date(),
     };
-
+    this.userService.create(user);
     this.users.push(user);
     return {
       token: 'jwt token',

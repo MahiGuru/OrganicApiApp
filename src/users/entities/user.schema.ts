@@ -6,7 +6,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { CoreEntitySchema } from 'src/common/entities/core.schema';
 
-@Schema()
+@Schema({
+  timestamps: true
+})
 export class User extends CoreEntitySchema {
   @Prop()
   name: string;

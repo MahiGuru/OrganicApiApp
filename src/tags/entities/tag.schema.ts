@@ -20,7 +20,7 @@ export class Tag extends CoreEntitySchema {
   @Prop()
   details: string;
    
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   image: AttachmentSchema;
   
   @Prop()

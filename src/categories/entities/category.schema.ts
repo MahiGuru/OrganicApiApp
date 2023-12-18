@@ -16,16 +16,16 @@ export class Category extends CoreEntitySchema {
   @Prop()
   slug: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Category.name })
   parent?: Category;
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Category.name }] })
   children?: Category[];
   
   @Prop()
   details?: string;
   
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   image?: AttachmentSchema;
   
   @Prop()

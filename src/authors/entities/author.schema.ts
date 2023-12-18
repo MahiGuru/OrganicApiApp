@@ -14,13 +14,13 @@ export class Author extends CoreEntitySchema {
   @Prop()
   born?: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   cover_image?: AttachmentSchema;
 
   @Prop()
   death?: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   image?: AttachmentSchema;
 
   @Prop()

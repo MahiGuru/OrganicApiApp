@@ -8,21 +8,20 @@ import { Address } from './entities/address.schema';
 @Injectable()
 export class AddressesService {
   
-  constructor(@InjectModel('Address') private catModel: Model<Address>) {}
+  constructor(@InjectModel('Address') private addressModel: Model<Address>) {}
 
   create(createAddressDto: CreateAddressDto) {
-    const createdCat = new this.catModel(createAddressDto);
+    const createdCat = new this.addressModel(createAddressDto);
     return createdCat.save();
-    // return 'This action adds a new address';
   }
 
   findAll() {
-    return this.catModel.find().exec();
+    return this.addressModel.find().exec();
     // return `This action returns all addresses`;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} address`;
+    return this.addressModel.findById(id).exec();
   }
 
   update(id: number, updateAddressDto: UpdateAddressDto) {
@@ -30,6 +29,7 @@ export class AddressesService {
   }
 
   remove(id: number) {
+    return this.addressModel.deleteOne({filter: id}).exec();
     return [];
   }
 }

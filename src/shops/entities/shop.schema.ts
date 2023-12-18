@@ -35,10 +35,10 @@ export class Shop extends CoreEntitySchema {
   @Prop()
   description?: string;
   
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   cover_image: AttachmentSchema;
   
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   logo?: AttachmentSchema;
   
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'UserAddress' })

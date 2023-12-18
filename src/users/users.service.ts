@@ -8,6 +8,8 @@ import Fuse from 'fuse.js';
 import { User } from './entities/user.entity';
 import usersJson from '@db/users.json';
 import { paginate } from 'src/common/pagination/paginate';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 const users = plainToClass(User, usersJson);
 
@@ -19,10 +21,16 @@ const fuse = new Fuse(users, options);
 
 @Injectable()
 export class UsersService {
+
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+
   private users: User[] = users;
 
   create(createUserDto: CreateUserDto) {
-    return this.users[0];
+    const createdUser = new this.userModel(createUserDto);
+    console.log("Created User >>>> ", createdUser);
+    return createdUser.save();
+    // return this.users[0];
   }
 
   async getUsers({
@@ -60,8 +68,12 @@ export class UsersService {
         ?.map(({ item }) => item);
     }
 
-    const results = data.slice(startIndex, endIndex);
+    // const results = data.slice(startIndex, endIndex);
     const url = `/users?limit=${limit}`;
+
+    const results = await this.userModel.find();
+
+    console.log("RESULTS >>>> ", results);
 
     return {
       data: results,

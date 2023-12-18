@@ -29,7 +29,7 @@ export class Review extends CoreEntitySchema {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   customer: User;
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' }] })
+  @Prop([String])
   photos: AttachmentSchema[];
   
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })

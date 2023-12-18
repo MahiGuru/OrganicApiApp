@@ -7,13 +7,13 @@ import { AttachmentSchema } from 'src/common/entities/attachment.schema';
 
 @Schema()
 export class Manufacturer extends CoreEntitySchema {
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   cover_image?: AttachmentSchema;
 
   @Prop()
   description?: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   image?: AttachmentSchema;
 
   @Prop()

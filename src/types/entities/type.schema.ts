@@ -11,7 +11,7 @@ export class Type extends CoreEntity {
   @Prop()
   slug: string;
   
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   image: Attachment;
   
   @Prop()
@@ -20,7 +20,7 @@ export class Type extends CoreEntity {
   @Prop()
   banners?: Banner[];
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' }] })
+  @Prop([])
   promotional_sliders?: AttachmentSchema[];
   
   @Prop()

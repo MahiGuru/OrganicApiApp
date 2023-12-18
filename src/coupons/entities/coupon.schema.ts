@@ -29,7 +29,7 @@ export class Coupon extends CoreEntity {
   @Prop()
   type: CouponType;
   
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' })
+  @Prop()
   image: AttachmentSchema;
   
   @Prop()
