@@ -4,18 +4,7 @@ import { Attachment } from 'src/common/entities/attachment.entity';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { CoreEntitySchema } from 'src/common/entities/core.schema';
 
-@Schema()
-export class Setting extends CoreEntitySchema {
-  
-  @Prop()
-  options: SettingsOptions;
-  
-  @Prop()
-  language: string;
-  
-  @Prop([String])
-  translated_languages: string[];
-}
+
 
 export class SettingsOptions {
   contactDetails: ContactDetails;
@@ -172,6 +161,20 @@ export class CurrencyOptions {
   fractions: number;
 }
 
+
+
+@Schema()
+export class Setting extends CoreEntitySchema {
+  
+  @Prop({ type: Object })
+  options: SettingsOptions;
+  
+  @Prop()
+  language: string;
+  
+  @Prop([String])
+  translated_languages: string[];
+}
 export type SettingDocument = HydratedDocument<Setting>; 
 
 export const SettingSchema = SchemaFactory.createForClass(Setting); 

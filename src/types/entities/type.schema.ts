@@ -24,7 +24,7 @@ export class Type extends CoreEntity {
   promotional_sliders?: AttachmentSchema[];
   
   @Prop()
-  settings?: TypeSettings;
+  settings?: string;
   
   @Prop()
   language: string;

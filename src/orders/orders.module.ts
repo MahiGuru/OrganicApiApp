@@ -9,9 +9,14 @@ import {
   OrderStatusController,
 } from './orders.controller';
 import { OrdersService } from './orders.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { OrderSchema } from './entities/order.schema';
 
 @Module({
-  imports: [AuthModule, PaymentModule],
+  imports: [
+    MongooseModule.forFeature([{ name: 'Order', schema: OrderSchema  }]),
+    AuthModule, PaymentModule
+  ],
   controllers: [
     OrdersController,
     OrderStatusController,

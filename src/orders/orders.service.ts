@@ -40,6 +40,8 @@ import {
   PaymentGatewayType,
   PaymentStatusType,
 } from './entities/order.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 const orders = plainToClass(Order, ordersJson);
 const paymentIntents = plainToClass(PaymentIntent, paymentIntentJson);
@@ -57,12 +59,14 @@ const settings = plainToClass(Setting, setting);
 
 @Injectable()
 export class OrdersService {
+
   private orders: Order[] = orders;
   private orderStatus: OrderStatus[] = orderStatus;
   private orderFiles: OrderFiles[] = orderFiles;
   private setting: Setting = { ...settings };
 
   constructor(
+    @InjectModel(Order.name) private orderModel: Model<Order>,
     private readonly authService: AuthService,
     private readonly stripeService: StripePaymentService,
     private readonly paypalService: PaypalPaymentService,
@@ -109,7 +113,11 @@ export class OrdersService {
         );
         order.payment_intent = paymentIntent;
       }
-      return order;
+ 
+      const createdOrder = new this.orderModel(order);
+      console.log("Created Order >>>> ", createdOrder);
+      return createdOrder.save();
+      // return order;
     } catch (error) {
       return order;
     }
@@ -128,10 +136,10 @@ export class OrdersService {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    let data: Order[] = this.orders;
+    let data: Order[] = await this.orderModel.find();
 
     if (shop_id && shop_id !== 'undefined') {
-      data = this.orders?.filter((p) => p?.shop?.id === Number(shop_id));
+      data = data?.filter((p) => p?.shop?.id === Number(shop_id));
     }
     const results = data.slice(startIndex, endIndex);
     const url = `/orders?search=${search}&limit=${limit}`;

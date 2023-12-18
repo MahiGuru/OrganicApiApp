@@ -14,6 +14,7 @@ import { UpdateShopDto } from './dto/update-shop.dto';
 import { GetShopsDto, ShopPaginator } from './dto/get-shops.dto';
 import { GetStaffsDto } from './dto/get-staffs.dto';
 import { UserPaginator } from 'src/users/dto/get-users.dto';
+import mongoose from 'mongoose';
 
 @Controller('shops')
 export class ShopsController {
@@ -25,7 +26,7 @@ export class ShopsController {
   }
 
   @Get()
-  async getShops(@Query() query: GetShopsDto): Promise<ShopPaginator> {
+  async getShops(@Query() query: GetShopsDto): Promise<any> {
     return this.shopsService.getShops(query);
   }
 
@@ -35,23 +36,23 @@ export class ShopsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateShopDto: UpdateShopDto) {
-    return this.shopsService.update(+id, updateShopDto);
+  update(@Param('id') id: mongoose.Schema.Types.ObjectId, @Body() updateShopDto: UpdateShopDto) {
+    return this.shopsService.update(id, updateShopDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.shopsService.remove(+id);
+  remove(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.shopsService.remove(id);
   }
 
   @Post('approve')
-  approveShop(@Param('id') id: string) {
-    return this.shopsService.approve(+id);
+  approveShop(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.shopsService.approve(id);
   }
 
   @Post('disapprove')
-  disapproveShop(@Param('id') id: string) {
-    return this.shopsService.approve(+id);
+  disapproveShop(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.shopsService.approve(id);
   }
 }
 
@@ -65,7 +66,7 @@ export class StaffsController {
   }
 
   @Get()
-  async getStaffs(@Query() query: GetStaffsDto): Promise<UserPaginator> {
+  async getStaffs(@Query() query: GetStaffsDto): Promise<any> {
     return this.shopsService.getStaffs(query);
   }
 
@@ -75,13 +76,13 @@ export class StaffsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateShopDto: UpdateShopDto) {
-    return this.shopsService.update(+id, updateShopDto);
+  update(@Param('id') id: mongoose.Schema.Types.ObjectId, @Body() updateShopDto: UpdateShopDto) {
+    return this.shopsService.update(id, updateShopDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.shopsService.remove(+id);
+  remove(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.shopsService.remove(id);
   }
 }
 

@@ -7,8 +7,13 @@ import {
   StaffsController,
   NearByShopController,
 } from './shops.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ShopSchema } from './entities/shop.schema';
 
 @Module({
+  imports: [
+    MongooseModule.forFeature([{ name: 'Shop', schema: ShopSchema }])
+  ],
   controllers: [
     ShopsController,
     StaffsController,

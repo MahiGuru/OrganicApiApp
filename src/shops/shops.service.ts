@@ -2,13 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CreateShopDto } from './dto/create-shop.dto';
 import { UpdateShopDto } from './dto/update-shop.dto';
-import { Shop } from './entities/shop.entity';
 import shopsJson from '@db/shops.json';
 import nearShopJson from '@db/near-shop.json';
 import Fuse from 'fuse.js';
 import { GetShopsDto } from './dto/get-shops.dto';
 import { paginate } from 'src/common/pagination/paginate';
 import { GetStaffsDto } from './dto/get-staffs.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import mongoose, { Model } from 'mongoose';
+import { Shop } from './entities/shop.schema';
 
 const shops = plainToClass(Shop, shopsJson);
 const nearShops = plainToClass(Shop, nearShopJson);
@@ -20,19 +22,23 @@ const fuse = new Fuse(shops, options);
 
 @Injectable()
 export class ShopsService {
+  constructor(@InjectModel(Shop.name) private shopModel: Model<Shop>) {}
+
   private shops: Shop[] = shops;
   private nearShops: Shop[] = shops;
 
   create(createShopDto: CreateShopDto) {
-    return this.shops[0];
+    const createdShop = new this.shopModel(createShopDto);
+    console.log("Created Shops >>>> ", createdShop);
+    return createdShop.save();
   }
 
-  getShops({ search, limit, page }: GetShopsDto) {
+  async getShops({ search, limit, page }: GetShopsDto) {
     if (!page) page = 1;
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    let data: Shop[] = this.shops;
+    let data: Shop[] = await this.shopModel.find();
     if (search) {
       const parseSearchParams = search.split(';');
       for (const searchParam of parseSearchParams) {
@@ -69,37 +75,36 @@ export class ShopsService {
     };
   }
 
-  getShop(slug: string): Shop {
-    return this.shops.find((p) => p.slug === slug);
+  async getShop(slug: string): Promise<Shop> {
+    return await this.shopModel.findOne({ slug });;
   }
 
-  getNearByShop(lat: string,lng: string) {
-    return nearShops;
+  async getNearByShop(lat: string,lng: string) {
+    return await this.shopModel.findOne({ lat, lng });
   }
 
-  update(id: number, updateShopDto: UpdateShopDto) {
-    return this.shops[0];
+  async update(id: mongoose.Schema.Types.ObjectId, updateShopDto: UpdateShopDto) {
+    return await this.shopModel.findOneAndUpdate(id, updateShopDto);   
   }
 
-  approve(id: number) {
+  async approve(id: mongoose.Schema.Types.ObjectId) {
+    return await this.shopModel.findOneAndDelete(id); 
     return `This action removes a #${id} shop`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} shop`;
+  async remove(id: mongoose.Schema.Types.ObjectId) {
+    return await this.shopModel.findOneAndDelete(id); 
   }
 
-  disapproveShop(id: number) {
-    const shop = this.shops.find((s) => s.id === Number(id));
-    shop.is_active = false;
-
-    return shop;
+  async disapproveShop(id: mongoose.Schema.Types.ObjectId) {
+    return await this.shopModel.findOneAndUpdate(id, {
+      is_active: false
+    });   
   }
 
-  approveShop(id: number) {
-    const shop = this.shops.find((s) => s.id === Number(id));
-    shop.is_active = true;
-
-    return shop;
+  async approveShop(id: mongoose.Schema.Types.ObjectId) {
+    return await this.shopModel.findOneAndUpdate(id, {
+      is_active: true
+    });
   }
 }

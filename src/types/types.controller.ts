@@ -12,6 +12,7 @@ import { TypesService } from './types.service';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
 import { GetTypesDto } from './dto/get-types.dto';
+import mongoose from 'mongoose';
 
 @Controller('types')
 export class TypesController {
@@ -33,12 +34,12 @@ export class TypesController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateTypeDto: UpdateTypeDto) {
-    return this.typesService.update(+id, updateTypeDto);
+  update(@Param('id') id: mongoose.Schema.Types.ObjectId, @Body() updateTypeDto: UpdateTypeDto) {
+    return this.typesService.update(id, updateTypeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.typesService.remove(+id);
+  remove(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.typesService.remove(id);
   }
 }

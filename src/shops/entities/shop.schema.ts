@@ -23,8 +23,9 @@ export class Shop extends CoreEntitySchema {
   @Prop()
   products_count: number;
   
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Balance' })
-  balance?: Balance;
+  @Prop({type: Object})
+  // balance?: Balance;
+  balance?: {};
 
   @Prop()
   name: string;
@@ -45,7 +46,7 @@ export class Shop extends CoreEntitySchema {
   address: UserAddress;
   
   @Prop()
-  settings?: ShopSettings;
+  settings?: string;
   
   @Prop()
   distance?: string;

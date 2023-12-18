@@ -20,6 +20,43 @@ enum ProductType {
   VARIABLE = 'variable',
 }
 
+export class OrderProductPivot {
+  @Prop()
+  variation_option_id?: number;
+  @Prop()
+  order_quantity: number;
+  @Prop()
+  unit_price: number;
+  @Prop()
+  subtotal: number;
+}
+
+export class Variation {
+  @Prop()
+  id: number;
+  @Prop()
+  title: string;
+  @Prop()
+  price: number;
+  @Prop()
+  sku: string;
+  @Prop()
+  is_disable: boolean;
+  @Prop()
+  sale_price?: number;
+  @Prop()
+  quantity: number;
+  @Prop()
+  options: VariationOption[];
+}
+
+export class VariationOption {
+  @Prop()
+  name: string;
+  @Prop()
+  value: string;
+}
+
 @Schema()
 export class Product extends CoreEntitySchema {
   @Prop()
@@ -108,43 +145,6 @@ export class Product extends CoreEntitySchema {
   
   @Prop([String])
   translated_languages?: string[];
-}
-
-export class OrderProductPivot {
-  @Prop()
-  variation_option_id?: number;
-  @Prop()
-  order_quantity: number;
-  @Prop()
-  unit_price: number;
-  @Prop()
-  subtotal: number;
-}
-
-export class Variation {
-  @Prop()
-  id: number;
-  @Prop()
-  title: string;
-  @Prop()
-  price: number;
-  @Prop()
-  sku: string;
-  @Prop()
-  is_disable: boolean;
-  @Prop()
-  sale_price?: number;
-  @Prop()
-  quantity: number;
-  @Prop()
-  options: VariationOption[];
-}
-
-export class VariationOption {
-  @Prop()
-  name: string;
-  @Prop()
-  value: string;
 }
 
 @Schema()

@@ -14,6 +14,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { GetProductsDto, ProductPaginator } from './dto/get-products.dto';
 import { Product } from './entities/product.entity';
 import { GetPopularProductsDto } from './dto/get-popular-products.dto';
+import mongoose from 'mongoose';
 
 @Controller('products')
 export class ProductsController {
@@ -30,18 +31,18 @@ export class ProductsController {
   }
 
   @Get(':slug')
-  async getProductBySlug(@Param('slug') slug: string): Promise<Product> {
-    return this.productsService.getProductBySlug(slug);
+  async getProductBySlug(@Param('slug') slug: string): Promise<any> {
+    return await this.productsService.getProductBySlug(slug);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(+id, updateProductDto);
+  update(@Param('id') id: mongoose.Schema.Types.ObjectId, @Body() updateProductDto: UpdateProductDto) {
+    return this.productsService.update(id, updateProductDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+  remove(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.productsService.remove(id);
   }
 }
 
@@ -49,7 +50,7 @@ export class ProductsController {
 export class PopularProductsController {
   constructor(private readonly productsService: ProductsService) {}
   @Get()
-  async getProducts(@Query() query: GetPopularProductsDto): Promise<Product[]> {
+  async getProducts(@Query() query: GetPopularProductsDto): Promise<any[]> {
     return this.productsService.getPopularProducts(query);
   }
 }

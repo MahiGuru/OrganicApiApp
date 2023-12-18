@@ -4,8 +4,13 @@ import {
   ProductsController,
   PopularProductsController,
 } from './products.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ProductSchema } from './entities/product.schema';
 
 @Module({
+  imports: [
+    MongooseModule.forFeature([{ name: 'Product', schema: ProductSchema }])
+  ],
   controllers: [ProductsController, PopularProductsController],
   providers: [ProductsService],
 })

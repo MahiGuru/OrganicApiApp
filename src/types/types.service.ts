@@ -7,6 +7,8 @@ import { Type } from './entities/type.entity';
 import typesJson from '@db/types.json';
 import Fuse from 'fuse.js';
 import { GetTypesDto } from './dto/get-types.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import mongoose, { Model } from 'mongoose';
 
 const types = plainToClass(Type, typesJson);
 const options = {
@@ -17,10 +19,13 @@ const fuse = new Fuse(types, options);
 
 @Injectable()
 export class TypesService {
+  
+  constructor(@InjectModel(Type.name) private typeModel: Model<Type>) {}
+
   private types: Type[] = types;
 
-  getTypes({ text, search }: GetTypesDto) {
-    let data: Type[] = this.types;
+  async getTypes({ text, search }: GetTypesDto) {
+    let data: Type[] = await this.typeModel.find();
     if (text?.replace(/%/g, '')) {
       data = fuse.search(text)?.map(({ item }) => item);
     }
@@ -48,27 +53,29 @@ export class TypesService {
     return data;
   }
 
-  getTypeBySlug(slug: string): Type {
-    return this.types.find((p) => p.slug === slug);
+  async getTypeBySlug(slug: string): Promise<Type> {
+    return await this.typeModel.findOne({ slug });
   }
 
   create(createTypeDto: CreateTypeDto) {
-    return this.types[0];
+    const createdType = new this.typeModel(createTypeDto);
+    console.log("Created Type >>>> ", createdType);
+    return createdType.save();
   }
 
-  findAll() {
-    return `This action returns all types`;
+  async findAll() {
+    return await this.typeModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} type`;
+  async findOne(id: number) {
+    return await this.typeModel.findById(id);
   }
 
-  update(id: number, updateTypeDto: UpdateTypeDto) {
-    return this.types[0];
+  async update(id: mongoose.Schema.Types.ObjectId, updateTypeDto: UpdateTypeDto) {
+    return await this.typeModel.findOneAndUpdate(id, updateTypeDto); 
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} type`;
+  async remove(id: mongoose.Schema.Types.ObjectId) {
+    return await this.typeModel.findOneAndDelete(id); 
   }
 }
