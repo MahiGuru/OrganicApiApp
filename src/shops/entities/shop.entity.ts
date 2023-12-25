@@ -5,7 +5,7 @@ import { Location, ShopSocials } from 'src/settings/entities/setting.entity';
 import { User } from 'src/users/entities/user.entity';
 
 export class Shop extends CoreEntity {
-  owner_id: number;
+  owner_id: string;
   owner: User;
   staffs?: User[];
   is_active: boolean;

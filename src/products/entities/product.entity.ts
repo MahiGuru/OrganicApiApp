@@ -21,11 +21,11 @@ enum ProductType {
 export class Product extends CoreEntity {
   name: string;
   slug: string;
-  // type: Type;
-  // type_id: number;
+  type: Type;
+  type_id?: string;
   // product_type: ProductType;
   categories: Category[];
-  // tags?: Tag[];
+  tags?: Tag[];
   // variations?: AttributeValue[];
   // variation_options?: Variation[];
   // pivot?: OrderProductPivot;

@@ -9,8 +9,9 @@ export class CreateShopDto extends PickType(Shop, [
   'logo',
   'settings',
   'balance',
+  'staffs'
 ]) {
-  categories: number[];
+  categories: string[];
 }
 
 export class ApproveShopDto {

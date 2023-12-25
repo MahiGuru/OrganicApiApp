@@ -9,21 +9,16 @@ export enum AddressType {
   SHIPPING = 'shipping',
 }
 
-@Schema()
+
 export class UserAddress {
-  @Prop()
   street_address: string;
 
-  @Prop()
   country: string;
   
-  @Prop()
   city: string;
   
-  @Prop()
   state: string;
   
-  @Prop()
   zip: string;
 }
 
@@ -35,7 +30,7 @@ export class Address extends CoreEntitySchema {
   @Prop()
   default: boolean;
   
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserAddress' })
+  @Prop({})
   address: UserAddress;
   
   @Prop()
@@ -46,7 +41,5 @@ export class Address extends CoreEntitySchema {
 }
 
 export type AddressDocument = HydratedDocument<Address>;
-export type UserAddressDocument = HydratedDocument<UserAddress>;
 
-export const UserAddressSchema = SchemaFactory.createForClass(Address);
 export const AddressSchema = SchemaFactory.createForClass(Address);

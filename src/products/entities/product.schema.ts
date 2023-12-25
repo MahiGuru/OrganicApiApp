@@ -63,10 +63,12 @@ export class Product extends CoreEntitySchema {
   name: string;
   @Prop()
   slug: string;
-  @Prop()
+  
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Type' })
   type: Type;
+  
   @Prop()
-  type_id: number;
+  type_id: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ProductType' })
   product_type: ProductType; 

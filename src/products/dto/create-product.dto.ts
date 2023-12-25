@@ -10,12 +10,12 @@ export class CreateProductDto extends OmitType(Product, [
   // 'pivot',
   // 'shop',
   'categories',
-  // 'tags',
-  // 'type',
+  'tags',
+  'type',
   // 'related_products',
   // 'variation_options',
   // 'translated_languages',
 ]) {
   categories: string[];
-  // tags: number[];
+  tags: string[];
 }

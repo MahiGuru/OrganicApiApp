@@ -29,9 +29,9 @@ export class TagsService {
     return createdTag.save();
   }
 
-  findAll({ page, limit, search }: GetTagsDto) {
+  async findAll({ page, limit, search }: GetTagsDto) {
     if (!page) page = 1;
-    let data: Tag[] = this.tags;
+    let data: Tag[] = await this.tagModel.find();;
     if (search) {
       const parseSearchParams = search.split(';');
       const searchText: any = [];

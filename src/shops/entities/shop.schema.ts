@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Address } from 'src/addresses/entities/address.entity';
 import { UserAddress } from 'src/addresses/entities/address.schema';
 import { AttachmentSchema } from 'src/common/entities/attachment.schema';
 import { CoreEntitySchema } from 'src/common/entities/core.schema';
@@ -9,13 +10,14 @@ import { User } from 'src/users/entities/user.schema';
 @Schema()
 export class Shop extends CoreEntitySchema {
   @Prop()
-  owner_id: number;
+  owner_id: string;
   
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: User.name })
   owner: User;
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: User.name }] })
   staffs?: User[];
+  
   @Prop()
   is_active: boolean;
   @Prop()
@@ -42,8 +44,8 @@ export class Shop extends CoreEntitySchema {
   @Prop()
   logo?: AttachmentSchema;
   
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'UserAddress' })
-  address: UserAddress;
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: Address.name })
+  address: Address;
   
   @Prop()
   settings?: string;

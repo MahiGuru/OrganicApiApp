@@ -10,6 +10,8 @@ import usersJson from '@db/users.json';
 import { paginate } from 'src/common/pagination/paginate';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Profile } from './entities/profile.entity';
+import { CreateProfileDto } from './dto/create-profile.dto';
 
 const users = plainToClass(User, usersJson);
 
@@ -22,7 +24,7 @@ const fuse = new Fuse(users, options);
 @Injectable()
 export class UsersService {
 
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<User>, @InjectModel(Profile.name) private profileModel: Model<Profile>) {}
 
   private users: User[] = users;
 
@@ -30,6 +32,14 @@ export class UsersService {
     const createdUser = new this.userModel(createUserDto);
     console.log("Created User >>>> ", createdUser);
     return createdUser.save();
+    // return this.users[0];
+  }
+
+  
+  createProfile(createProfileDto: CreateProfileDto) {
+    const createdProfile = new this.profileModel(createProfileDto);
+    console.log("Created User >>>> ", createdProfile);
+    return createdProfile.save();
     // return this.users[0];
   }
 
@@ -43,7 +53,7 @@ export class UsersService {
     if (!limit) limit = 30;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    let data: User[] = this.users;
+    let data: User[] = await this.userModel.find();
     if (text?.replace(/%/g, '')) {
       data = fuse.search(text)?.map(({ item }) => item);
     }

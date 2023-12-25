@@ -38,7 +38,8 @@ export class ShopsService {
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    let data: Shop[] = await this.shopModel.find();
+    let data: Shop[] = await this.shopModel.find().populate(["address", "staffs"]);
+    console.log("DAT SHOPPP ", data);
     if (search) {
       const parseSearchParams = search.split(';');
       for (const searchParam of parseSearchParams) {
@@ -59,12 +60,14 @@ export class ShopsService {
     };
   }
 
-  getStaffs({ shop_id, limit, page }: GetStaffsDto) {
+  async getStaffs({ shop_id, limit, page }: GetStaffsDto) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    let staffs: Shop['staffs'] = [];
+    let staffs: any = [];
+    let shops: Shop[] = await this.shopModel.find();
+
     if (shop_id) {
-      staffs = this.shops.find((p) => p.id === Number(shop_id))?.staffs ?? [];
+      staffs = shops.find((p) => p._id === shop_id)?.staffs ?? [];
     }
     const results = staffs?.slice(startIndex, endIndex);
     const url = `/staffs?limit=${limit}`;
@@ -76,7 +79,11 @@ export class ShopsService {
   }
 
   async getShop(slug: string): Promise<Shop> {
-    return await this.shopModel.findOne({ slug });;
+    const findSlugVal = await this.shopModel.find().populate("owner");
+    console.log(findSlugVal);
+    const result = findSlugVal.find((p) => p.name === slug || p._id === slug || p.description === slug);
+    console.log(result, slug);
+    return result;
   }
 
   async getNearByShop(lat: string,lng: string) {

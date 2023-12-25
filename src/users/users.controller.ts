@@ -66,6 +66,8 @@ export class ProfilesController {
 
   @Post()
   createProfile(@Body() createProfileDto: CreateProfileDto) {
+    return this.usersService.createProfile(createProfileDto);
+
     console.log(createProfileDto);
   }
 

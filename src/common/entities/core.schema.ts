@@ -4,7 +4,7 @@ import { Type } from 'class-transformer';
 
 export class CoreEntitySchema {
   @Prop()
-  id: number;
+  _id: string;
   
   @Prop()
   @Type(() => Date)
