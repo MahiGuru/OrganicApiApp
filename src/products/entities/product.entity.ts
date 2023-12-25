@@ -21,18 +21,18 @@ enum ProductType {
 export class Product extends CoreEntity {
   name: string;
   slug: string;
-  type: Type;
-  type_id: number;
-  product_type: ProductType;
+  // type: Type;
+  // type_id: number;
+  // product_type: ProductType;
   categories: Category[];
-  tags?: Tag[];
-  variations?: AttributeValue[];
-  variation_options?: Variation[];
-  pivot?: OrderProductPivot;
-  orders?: Order[];
-  shop: Shop;
-  shop_id: number;
-  related_products?: Product[];
+  // tags?: Tag[];
+  // variations?: AttributeValue[];
+  // variation_options?: Variation[];
+  // pivot?: OrderProductPivot;
+  // orders?: Order[];
+  // shop: Shop;
+  // shop_id: number;
+  // related_products?: Product[];
   description: string;
   in_stock: boolean;
   is_taxable: boolean;
@@ -40,8 +40,8 @@ export class Product extends CoreEntity {
   max_price?: number;
   min_price?: number;
   sku?: string;
-  gallery?: Attachment[];
-  image?: Attachment;
+  // gallery?: Attachment[];
+  // image?: Attachment;
   status: ProductStatus;
   height?: string;
   length?: string;
@@ -51,7 +51,7 @@ export class Product extends CoreEntity {
   unit: string;
   ratings: number;
   in_wishlist: boolean;
-  my_review?: Review[];
+  // my_review?: Review[];
   language?: string;
   translated_languages?: string[];
 }

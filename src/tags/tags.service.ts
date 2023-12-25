@@ -7,6 +7,8 @@ import { Tag } from './entities/tag.entity';
 import tagsJson from '@db/tags.json';
 import { plainToClass } from 'class-transformer';
 import Fuse from 'fuse.js';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 const tags = plainToClass(Tag, tagsJson);
 
@@ -16,15 +18,15 @@ const options = {
 };
 const fuse = new Fuse(tags, options);
 
-@Injectable()
 export class TagsService {
   private tags: Tag[] = tags;
-
+  constructor(@InjectModel(Tag.name) private tagModel: Model<Tag>) {
+      
+    }
   create(createTagDto: CreateTagDto) {
-    return {
-      id: this.tags.length + 1,
-      ...createTagDto,
-    };
+    const createdTag = new this.tagModel(createTagDto);
+    console.log("Created Tag >>>> ", createdTag);
+    return createdTag.save();
   }
 
   findAll({ page, limit, search }: GetTagsDto) {

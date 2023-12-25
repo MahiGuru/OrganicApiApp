@@ -3,6 +3,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { Attachment } from 'src/common/entities/attachment.entity';
 import { AttachmentSchema } from 'src/common/entities/attachment.schema';
 import { CoreEntity } from 'src/common/entities/core.entity';
+import { Setting } from 'src/settings/entities/setting.entity';
 
 @Schema()
 export class Type extends CoreEntity {
@@ -23,8 +24,8 @@ export class Type extends CoreEntity {
   @Prop([])
   promotional_sliders?: AttachmentSchema[];
   
-  @Prop()
-  settings?: string;
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Setting' })
+  settings?: Setting;
   
   @Prop()
   language: string;
