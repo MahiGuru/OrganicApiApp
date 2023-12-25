@@ -8,11 +8,11 @@ export class CreateProductDto extends OmitType(Product, [
   'updated_at',
   // 'orders',
   // 'pivot',
-  // 'shop',
+  'shop',
   'categories',
   'tags',
   'type',
-  // 'related_products',
+  'related_products',
   // 'variation_options',
   // 'translated_languages',
 ]) {

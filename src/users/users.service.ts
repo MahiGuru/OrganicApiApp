@@ -109,11 +109,11 @@ export class UsersService {
   }
 
   makeAdmin(user_id: string) {
-    return this.users.find((u) => u.id === Number(user_id));
+    return this.users.find((u) => u.id === String(user_id));
   }
 
   banUser(id: number) {
-    const user = this.users.find((u) => u.id === Number(id));
+    const user = this.users.find((u) => u.id === String(id));
 
     user.is_active = !user.is_active;
 
@@ -121,7 +121,7 @@ export class UsersService {
   }
 
   activeUser(id: number) {
-    const user = this.users.find((u) => u.id === Number(id));
+    const user = this.users.find((u) => u.id === String(id));
 
     user.is_active = !user.is_active;
 

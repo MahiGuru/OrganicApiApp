@@ -58,7 +58,7 @@ export class AuthorsService {
   }
 
   update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    const author = this.authors.find((p) => p.id === Number(id));
+    const author = this.authors.find((p) => p.id === String(id));
 
     // Update author
     author.is_approved = updateAuthorDto.is_approved ?? true;

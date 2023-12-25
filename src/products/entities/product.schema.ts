@@ -70,7 +70,7 @@ export class Product extends CoreEntitySchema {
   @Prop()
   type_id: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ProductType' })
+  @Prop()
   product_type: ProductType; 
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }] })
@@ -79,10 +79,10 @@ export class Product extends CoreEntitySchema {
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }] })
   tags?: Tag[];
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AttributeValue' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: AttributeValue.name }] })
   variations?: AttributeValue[];
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Variation' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Variation.name }] })
   variation_options?: Variation[];
   @Prop()
   pivot?: OrderProductPivot;
@@ -94,10 +94,11 @@ export class Product extends CoreEntitySchema {
   shop: Shop;
   
   @Prop()
-  shop_id: number; 
+  shop_id: string; 
   
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }] })
   related_products?: Product[];
+
   @Prop()
   description: string;
   @Prop()
@@ -119,7 +120,7 @@ export class Product extends CoreEntitySchema {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'AttachmentSchema' })
   image?: AttachmentSchema;
 
-  @Prop()
+  @Prop(String)
   status: ProductStatus;
 
   @Prop()

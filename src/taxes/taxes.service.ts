@@ -20,7 +20,7 @@ export class TaxesService {
   }
 
   findOne(id: number) {
-    return this.taxes.find((tax) => tax.id === Number(id));
+    return this.taxes.find((tax) => tax.id === String(id));
   }
 
   update(id: number, updateTaxDto: UpdateTaxDto) {

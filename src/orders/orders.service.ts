@@ -154,7 +154,7 @@ export class OrdersService {
       return (
         this.orders.find(
           (o: Order) =>
-            o.id === Number(id) || o.tracking_number === id.toString(),
+            o.id === String(id) || o.tracking_number === id.toString(),
         ) ?? this.orders[0]
       );
     } catch (error) {

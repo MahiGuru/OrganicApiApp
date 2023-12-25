@@ -59,7 +59,7 @@ export class PaymentMethodService {
 
   findOne(id: number) {
     return this.paymentMethods.find(
-      (pm: PaymentMethod) => pm.id === Number(id),
+      (pm: PaymentMethod) => pm.id === String(id),
     );
   }
 
