@@ -32,21 +32,18 @@ export class ShopsService {
   private shops: Shop[] = shops;
   private nearShops: Shop[] = shops;
 
-  async create(createShopDto: CreateShopDto) {
-    console.log("CREATE SHOP DTO ", createShopDto);
+  async create(createShopDto: CreateShopDto) { 
     
     const createdAddress = new this.addressModel(createShopDto);
     const addressCreated = await createdAddress.save()
      
     const createdSetting = new this.settingModel({options: {contactDetails: createShopDto.settings}})
-    const settingsCreated = await createdSetting.save()
-    console.log("settingsCreated >>>> ", settingsCreated);
+    const settingsCreated = await createdSetting.save() 
 
     createShopDto['address'] = String(addressCreated._id);
     createShopDto['settings'] = String(settingsCreated._id);
     
-    const createdShop = new this.shopModel(createShopDto);
-    console.log("Created Shops >>>> ", addressCreated);
+    const createdShop = new this.shopModel(createShopDto); 
     return createdShop.save();
   }
 
