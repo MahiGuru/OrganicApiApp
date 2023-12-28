@@ -9,5 +9,6 @@ import { Address } from './entities/address.entity';
   imports: [MongooseModule.forFeature([{ name: Address.name, schema: AddressSchema }])],
   controllers: [AddressesController],
   providers: [AddressesService],
+  exports: [AddressesService]
 })
 export class AddressesModule {}

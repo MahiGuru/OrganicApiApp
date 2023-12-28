@@ -9,18 +9,24 @@ export enum AddressType {
   SHIPPING = 'shipping',
 }
 
-
+@Schema({_id: false})
 export class UserAddress {
+  @Prop()
   street_address: string;
 
+  @Prop()
   country: string;
   
+  @Prop()
   city: string;
   
+  @Prop()
   state: string;
   
+  @Prop()
   zip: string;
 }
+export const UserAddressSchema = SchemaFactory.createForClass(UserAddress);
 
 @Schema()
 export class Address extends CoreEntitySchema {
@@ -30,7 +36,7 @@ export class Address extends CoreEntitySchema {
   @Prop()
   default: boolean;
   
-  @Prop({})
+  @Prop({type: UserAddressSchema})
   address: UserAddress;
   
   @Prop()

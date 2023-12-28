@@ -11,6 +11,8 @@ import { GetStaffsDto } from './dto/get-staffs.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { Shop } from './entities/shop.schema';
+import { Address } from 'src/addresses/entities/address.schema';
+import { Setting } from 'src/settings/entities/setting.schema';
 
 const shops = plainToClass(Shop, shopsJson);
 const nearShops = plainToClass(Shop, nearShopJson);
@@ -22,14 +24,29 @@ const fuse = new Fuse(shops, options);
 
 @Injectable()
 export class ShopsService {
-  constructor(@InjectModel(Shop.name) private shopModel: Model<Shop>) {}
+  constructor(@InjectModel(Shop.name) private shopModel: Model<Shop>, 
+    @InjectModel(Address.name) private addressModel: Model<Address>,
+    @InjectModel(Setting.name) private settingModel: Model<Setting>
+    ) {}
 
   private shops: Shop[] = shops;
   private nearShops: Shop[] = shops;
 
-  create(createShopDto: CreateShopDto) {
+  async create(createShopDto: CreateShopDto) {
+    console.log("CREATE SHOP DTO ", createShopDto);
+    
+    const createdAddress = new this.addressModel(createShopDto);
+    const addressCreated = await createdAddress.save()
+     
+    const createdSetting = new this.settingModel({options: {contactDetails: createShopDto.settings}})
+    const settingsCreated = await createdSetting.save()
+    console.log("settingsCreated >>>> ", settingsCreated);
+
+    createShopDto['address'] = String(addressCreated._id);
+    createShopDto['settings'] = String(settingsCreated._id);
+    
     const createdShop = new this.shopModel(createShopDto);
-    console.log("Created Shops >>>> ", createdShop);
+    console.log("Created Shops >>>> ", addressCreated);
     return createdShop.save();
   }
 

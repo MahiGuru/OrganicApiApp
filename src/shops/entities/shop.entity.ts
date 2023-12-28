@@ -17,8 +17,8 @@ export class Shop extends CoreEntity {
   description?: string;
   cover_image: Attachment;
   logo?: Attachment;
-  address: UserAddress;
-  settings?: ShopSettings;
+  address: string;
+  settings?: string;
   distance?: string;
   lat?: string;
   lng?: string;

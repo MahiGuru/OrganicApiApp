@@ -5,6 +5,8 @@ import { AttachmentSchema } from 'src/common/entities/attachment.schema';
 import { CoreEntitySchema } from 'src/common/entities/core.schema';
 import { User } from 'src/users/entities/user.schema';
 import { Balance, BalanceSchema } from './balance.schema';
+import { Setting } from 'src/settings/entities/setting.schema';
+import { ShopSettings } from './shop.entity';
 @Schema()
 export class Shop extends CoreEntitySchema {
   @Prop()
@@ -44,14 +46,15 @@ export class Shop extends CoreEntitySchema {
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: Address.name })
   address: Address;
   
-  @Prop()
-  settings?: string;
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: Setting.name })
+  settings?: Setting;
   
   @Prop()
   distance?: string;
   
   @Prop()
   lat?: string;
+
   @Prop()
   lng?: string;
 }
