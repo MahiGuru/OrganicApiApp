@@ -6,15 +6,15 @@ export class CreateProductDto extends OmitType(Product, [
   'slug',
   'created_at',
   'updated_at',
-  // 'orders',
-  // 'pivot',
+  'orders',
+  'pivot',
   'shop',
   'categories',
   'tags',
   'type',
   'related_products',
-  // 'variation_options',
-  // 'translated_languages',
+  'variation_options',
+  'translated_languages',
 ]) {
   categories: string[];
   tags: string[];

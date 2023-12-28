@@ -15,6 +15,6 @@ export class CreateShopDto extends PickType(Shop, [
 }
 
 export class ApproveShopDto {
-  id: number;
+  id: number | string;
   admin_commission_rate: number;
 }

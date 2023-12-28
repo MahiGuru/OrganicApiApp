@@ -25,7 +25,7 @@ export class Shop extends CoreEntity {
 }
 
 export class Balance {
-  id: number;
+  id: number | string;
   admin_commission_rate: number;
   shop: Shop;
   total_earnings: number;

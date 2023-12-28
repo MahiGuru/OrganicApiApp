@@ -68,7 +68,7 @@ export class ManufacturersService {
     );
   }
 
-  update(id: number, updateManufacturesDto: UpdateManufacturerDto) {
+  update(id: number | string, updateManufacturesDto: UpdateManufacturerDto) {
     const manufacturer = this.manufacturers.find((p) => p.id === String(id));
 
     // Update author
@@ -77,7 +77,7 @@ export class ManufacturersService {
     return manufacturer;
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} product`;
   }
 }

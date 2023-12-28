@@ -19,7 +19,7 @@ enum ProductType {
   SIMPLE = 'simple',
   VARIABLE = 'variable',
 }
-
+@Schema({_id: false})
 export class OrderProductPivot {
   @Prop()
   variation_option_id?: number;
@@ -31,31 +31,47 @@ export class OrderProductPivot {
   subtotal: number;
 }
 
-export class Variation {
-  @Prop()
-  id: number;
-  @Prop()
-  title: string;
-  @Prop()
-  price: number;
-  @Prop()
-  sku: string;
-  @Prop()
-  is_disable: boolean;
-  @Prop()
-  sale_price?: number;
-  @Prop()
-  quantity: number;
-  @Prop()
-  options: VariationOption[];
-}
+const OrderProductPivotSchema = SchemaFactory.createForClass(OrderProductPivot);
 
+@Schema({_id: false})
 export class VariationOption {
   @Prop()
   name: string;
   @Prop()
   value: string;
 }
+
+export const VariationOptionSchema = SchemaFactory.createForClass(VariationOption);
+
+@Schema({_id: false})
+export class Variation {
+
+  @Prop()
+  id: number;
+
+  @Prop()
+  title: string;
+
+  @Prop()
+  price: number;
+
+  @Prop()
+  sku: string;
+
+  @Prop()
+  is_disable: boolean;
+
+  @Prop()
+  sale_price?: number;
+
+  @Prop()
+  quantity: number;
+
+  @Prop({ type: [{ type: [{type : VariationOptionSchema }] }] })
+  options: VariationOption[];
+}
+
+const VariationSchema = SchemaFactory.createForClass(Variation);
 
 @Schema()
 export class Product extends CoreEntitySchema {
@@ -82,9 +98,10 @@ export class Product extends CoreEntitySchema {
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: AttributeValue.name }] })
   variations?: AttributeValue[];
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Variation.name }] })
+  @Prop({ type: [{ type: VariationSchema }] })
   variation_options?: Variation[];
-  @Prop()
+ 
+  @Prop({ type: OrderProductPivotSchema })
   pivot?: OrderProductPivot;
   
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }] })
@@ -93,7 +110,7 @@ export class Product extends CoreEntitySchema {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Shop' })
   shop: Shop;
   
-  @Prop()
+  @Prop({type: mongoose.Schema.Types.ObjectId })
   shop_id: string; 
   
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }] })
@@ -150,6 +167,8 @@ export class Product extends CoreEntitySchema {
   translated_languages?: string[];
 }
 
+export const ProductSchema = SchemaFactory.createForClass(Product); 
+
 @Schema()
 export class File extends CoreEntitySchema {
   @Prop()
@@ -158,9 +177,6 @@ export class File extends CoreEntitySchema {
   url: string;
   @Prop()
   fileable_id: number;
-}
-export type ProductDocument = HydratedDocument<Product>;
-export type FileDocument = HydratedDocument<File>;
+} 
 
-export const ProductSchema = SchemaFactory.createForClass(Product);
 export const FileSchema = SchemaFactory.createForClass(File);

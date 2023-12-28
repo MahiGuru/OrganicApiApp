@@ -14,15 +14,15 @@ export class RefundsService {
     };
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return `This action returns a #${id} refund`;
   }
 
-  update(id: number, updateRefundDto: UpdateRefundDto) {
+  update(id: number | string, updateRefundDto: UpdateRefundDto) {
     return `This action updates a #${id} refund`;
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} refund`;
   }
 }

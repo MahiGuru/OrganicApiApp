@@ -51,10 +51,10 @@ export class Review extends CoreEntitySchema {
   negative_feedbacks_count: number;
   
   @Prop()
-  user_id: number;
+  user_id: number | string;
   
   @Prop()
-  product_id: number;
+  product_id: number | string;
   
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Report' }] })
   abusive_reports: Report[];

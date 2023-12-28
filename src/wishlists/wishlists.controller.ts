@@ -57,6 +57,6 @@ export class WishlistsController {
   // /in_wishlist/{product_id}
   @Get('/in_wishlist/:product_id')
   inWishlist(@Param('product_id') id: string) {
-    return this.wishlistService.isInWishlist(+id);
+    return this.wishlistService.isInWishlist(id);
   }
 }

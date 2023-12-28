@@ -5,7 +5,7 @@ export class PaypalCreateIntentPram {
 }
 
 export class PurchaseUnit {
-  invoice_id: number;
+  invoice_id: number | string;
   amount: Amount;
   description: string;
 }

@@ -39,7 +39,7 @@ export class WithdrawsController {
   }
 
   @Delete(':id')
-  deleteWithdraw(@Param('id') id: number) {
+  deleteWithdraw(@Param('id') id: number | string) {
     return this.withdrawsService.remove(+id);
   }
 }

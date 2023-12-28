@@ -96,15 +96,15 @@ export class UsersService {
     return data?.slice(0, limit);
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return this.users.find((user) => user.id === id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number | string, updateUserDto: UpdateUserDto) {
     return this.users[0];
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} user`;
   }
 
@@ -112,7 +112,7 @@ export class UsersService {
     return this.users.find((u) => u.id === String(user_id));
   }
 
-  banUser(id: number) {
+  banUser(id: number | string) {
     const user = this.users.find((u) => u.id === String(id));
 
     user.is_active = !user.is_active;
@@ -120,7 +120,7 @@ export class UsersService {
     return user;
   }
 
-  activeUser(id: number) {
+  activeUser(id: number | string) {
     const user = this.users.find((u) => u.id === String(id));
 
     user.is_active = !user.is_active;

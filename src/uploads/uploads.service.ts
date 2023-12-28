@@ -6,11 +6,11 @@ export class UploadsService {
     return `This action returns all uploads`;
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return `This action returns a #${id} upload`;
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} upload`;
   }
 }

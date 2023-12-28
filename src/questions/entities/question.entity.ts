@@ -4,9 +4,9 @@ import { User } from 'src/users/entities/user.entity';
 import { Feedback } from '../../feedbacks/entities/feedback.entity';
 
 export class Question extends CoreEntity {
-  user_id: number;
-  product_id: number;
-  shop_id: number;
+  user_id: number | string;
+  product_id: number | string;
+  shop_id: number | string;
   question?: string;
   answer: string;
   positive_feedbacks_count?: number;

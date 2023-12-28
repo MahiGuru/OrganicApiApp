@@ -139,7 +139,7 @@ export class OrdersService {
     let data: Order[] = await this.orderModel.find();
 
     if (shop_id && shop_id !== 'undefined') {
-      data = data?.filter((p) => p?.shop?.id === Number(shop_id));
+      data = data?.filter((p) => p?.shop?.id === shop_id);
     }
     const results = data.slice(startIndex, endIndex);
     const url = `/orders?search=${search}&limit=${limit}`;
@@ -149,7 +149,7 @@ export class OrdersService {
     };
   }
 
-  async getOrderByIdOrTrackingNumber(id: number): Promise<Order> {
+  async getOrderByIdOrTrackingNumber(id: number | string): Promise<Order> {
     try {
       return (
         this.orders.find(
@@ -211,11 +211,11 @@ export class OrdersService {
     return this.orderStatus.find((p) => p.slug === param);
   }
 
-  update(id: number, updateOrderInput: UpdateOrderDto) {
+  update(id: number | string, updateOrderInput: UpdateOrderDto) {
     return this.orders[0];
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} order`;
   }
 

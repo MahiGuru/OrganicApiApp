@@ -46,7 +46,7 @@ export class ReviewService {
     };
   }
 
-  findReview(id: number) {
+  findReview(id: number | string) {
     return this.reviews.find((p) => p.id === id);
   }
 
@@ -54,11 +54,11 @@ export class ReviewService {
     return this.reviews[0];
   }
 
-  update(id: number, updateReviewDto: UpdateReviewDto) {
+  update(id: number | string, updateReviewDto: UpdateReviewDto) {
     return this.reviews[0];
   }
 
-  delete(id: number) {
+  delete(id: number | string) {
     return this.reviews[0];
   }
 }

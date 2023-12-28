@@ -12,7 +12,7 @@ export class Withdraw extends CoreEntitySchema {
   status: WithdrawStatus;
   
   @Prop()
-  shop_id: number; 
+  shop_id: number | string; 
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Shop' })
   shop: Shop;

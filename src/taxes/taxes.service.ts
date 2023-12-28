@@ -19,15 +19,15 @@ export class TaxesService {
     return this.taxes;
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return this.taxes.find((tax) => tax.id === String(id));
   }
 
-  update(id: number, updateTaxDto: UpdateTaxDto) {
+  update(id: number | string, updateTaxDto: UpdateTaxDto) {
     return this.taxes[0];
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} tax`;
   }
 }

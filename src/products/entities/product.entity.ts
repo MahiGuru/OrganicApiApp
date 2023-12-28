@@ -26,10 +26,10 @@ export class Product extends CoreEntity {
   product_type: ProductType;
   categories: Category[];
   tags?: Tag[];
-  // variations?: AttributeValue[];
-  // variation_options?: Variation[];
-  // pivot?: OrderProductPivot;
-  // orders?: Order[];
+  variations?: AttributeValue[];
+  variation_options?: Variation[];
+  pivot?: OrderProductPivot;
+  orders?: Order[];
   shop: Shop;
   shop_id: string;
   related_products?: Product[];

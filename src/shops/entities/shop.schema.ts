@@ -1,12 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Address } from 'src/addresses/entities/address.entity';
-import { UserAddress } from 'src/addresses/entities/address.schema';
 import { AttachmentSchema } from 'src/common/entities/attachment.schema';
 import { CoreEntitySchema } from 'src/common/entities/core.schema';
-import { Location, ShopSocials } from 'src/settings/entities/setting.schema';
 import { User } from 'src/users/entities/user.schema';
-
+import { Balance, BalanceSchema } from './balance.schema';
 @Schema()
 export class Shop extends CoreEntitySchema {
   @Prop()
@@ -25,9 +23,8 @@ export class Shop extends CoreEntitySchema {
   @Prop()
   products_count: number;
   
-  @Prop({type: Object})
-  // balance?: Balance;
-  balance?: {};
+  @Prop({type: BalanceSchema}) 
+  balance?: Balance;
 
   @Prop()
   name: string;
@@ -58,31 +55,5 @@ export class Shop extends CoreEntitySchema {
   @Prop()
   lng?: string;
 }
-
-export class Balance {
-  id: number;
-  admin_commission_rate: number;
-  shop: Shop;
-  total_earnings: number;
-  withdrawn_amount: number;
-  current_balance: number;
-  payment_info: PaymentInfo;
-}
-
-export class PaymentInfo {
-  account: string;
-  name: string;
-  email: string;
-  bank: string;
-}
-
-export class ShopSettings {
-  socials: ShopSocials[];
-  contact: string;
-  location: Location;
-  website: string;
-}
-
-export type ShopDocument = HydratedDocument<Shop>;
 
 export const ShopSchema = SchemaFactory.createForClass(Shop);

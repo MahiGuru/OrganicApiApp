@@ -21,15 +21,15 @@ export class AddressesService {
     // return `This action returns all addresses`;
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return this.addressModel.findById(id).exec();
   }
 
-  update(id: number, updateAddressDto: UpdateAddressDto) {
+  update(id: number | string, updateAddressDto: UpdateAddressDto) {
     return `This action updates a #${id} address`;
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return this.addressModel.deleteOne({filter: id}).exec();
     return [];
   }

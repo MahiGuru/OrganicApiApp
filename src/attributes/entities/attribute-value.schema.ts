@@ -8,7 +8,7 @@ import { CoreEntitySchema } from 'src/common/entities/core.schema';
 export class AttributeValue extends CoreEntitySchema {
   
   @Prop()
-  shop_id: number;
+  shop_id: number | string;
 
   @Prop()
   value: string;

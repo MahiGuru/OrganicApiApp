@@ -57,17 +57,17 @@ export class PaymentMethodService {
     return this.paymentMethods;
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return this.paymentMethods.find(
       (pm: PaymentMethod) => pm.id === String(id),
     );
   }
 
-  update(id: number, updatePaymentMethodDto: UpdatePaymentMethodDto) {
+  update(id: number | string, updatePaymentMethodDto: UpdatePaymentMethodDto) {
     return this.findOne(id);
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     const card: PaymentMethod = this.findOne(id);
     this.paymentMethods = [...this.paymentMethods].filter(
       (cards: PaymentMethod) => cards.id !== id,
@@ -78,7 +78,7 @@ export class PaymentMethodService {
   saveDefaultCart(defaultCart: DefaultCart) {
     const { method_id } = defaultCart;
     this.paymentMethods = [...this.paymentMethods].map((c: PaymentMethod) => {
-      if (c.id === Number(method_id)) {
+      if (c.id === (method_id)) {
         c.default_card = true;
       } else {
         c.default_card = false;
@@ -174,7 +174,7 @@ export class PaymentMethodService {
     );
     if (!customerGateway) {
       customerGateway = {
-        id: Number(Date.now()),
+        id: Date.now(),
         user_id: user_id,
         customer_id: currentCustomer['id'],
         gateway_name: paymentGateway,

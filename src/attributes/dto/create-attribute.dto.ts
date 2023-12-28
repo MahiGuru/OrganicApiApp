@@ -10,7 +10,7 @@ export class CreateAttributeDto extends PickType(Attribute, [
 }
 
 export class AttributeValueDto {
-  id: number;
+  id: number | string;
   value: string;
   meta?: string;
   language?: string;

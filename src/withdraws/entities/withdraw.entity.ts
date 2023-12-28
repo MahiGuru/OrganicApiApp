@@ -4,7 +4,7 @@ import { Shop } from 'src/shops/entities/shop.entity';
 export class Withdraw extends CoreEntity {
   amount: number;
   status: WithdrawStatus;
-  shop_id: number;
+  shop_id: number | string;
   shop: Shop;
   payment_method: string;
   details: string;

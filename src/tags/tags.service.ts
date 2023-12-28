@@ -61,14 +61,14 @@ export class TagsService {
   }
 
   findOne(param: string, language: string) {
-    return this.tags.find((p) => p.id === Number(param) || p.slug === param);
+    return this.tags.find((p) => p.id === (param) || p.slug === param);
   }
 
-  update(id: number, updateTagDto: UpdateTagDto) {
+  update(id: number | string, updateTagDto: UpdateTagDto) {
     return this.tags[0];
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} tag`;
   }
 }

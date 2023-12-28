@@ -67,7 +67,7 @@ export class TypesService {
     return await this.typeModel.find();
   }
 
-  async findOne(id: number) {
+  async findOne(id: number | string) {
     return await this.typeModel.findById(id);
   }
 

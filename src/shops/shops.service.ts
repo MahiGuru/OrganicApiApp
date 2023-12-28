@@ -67,7 +67,7 @@ export class ShopsService {
     let shops: Shop[] = await this.shopModel.find();
 
     if (shop_id) {
-      staffs = shops.find((p) => p._id === shop_id)?.staffs ?? [];
+      staffs = shops.find((p: any) => p._id === shop_id)?.staffs ?? [];
     }
     const results = staffs?.slice(startIndex, endIndex);
     const url = `/staffs?limit=${limit}`;
@@ -78,7 +78,7 @@ export class ShopsService {
     };
   }
 
-  async getShop(slug: string): Promise<Shop> {
+  async getShop(slug: any): Promise<Shop> {
     const findSlugVal = await this.shopModel.find().populate("owner");
     console.log(findSlugVal);
     const result = findSlugVal.find((p) => p.name === slug || p._id === slug || p.description === slug);

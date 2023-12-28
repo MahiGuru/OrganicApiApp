@@ -44,7 +44,7 @@ export class MyQuestionsService {
     };
   }
 
-  findMyQuestion(id: number) {
+  findMyQuestion(id: number | string) {
     return this.myQuestion.find((p) => p.id === id);
   }
 
@@ -52,11 +52,11 @@ export class MyQuestionsService {
     return this.myQuestion[0];
   }
 
-  update(id: number, updateQuestionDto: UpdateQuestionDto) {
+  update(id: number | string, updateQuestionDto: UpdateQuestionDto) {
     return this.myQuestion[0];
   }
 
-  delete(id: number) {
+  delete(id: number | string) {
     return this.myQuestion[0];
   }
 }

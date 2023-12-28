@@ -43,15 +43,15 @@ export class WithdrawsService {
     };
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return `This action returns a #${id} withdraw`;
   }
 
-  update(id: number, updateWithdrawDto: ApproveWithdrawDto) {
+  update(id: number | string, updateWithdrawDto: ApproveWithdrawDto) {
     return this.withdraws[0];
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} withdraw`;
   }
 }

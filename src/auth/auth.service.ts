@@ -149,7 +149,7 @@ export class AuthService {
     return this.users[0];
   }
 
-  // updateUser(id: number, updateUserInput: UpdateUserInput) {
+  // updateUser(id: number | string, updateUserInput: UpdateUserInput) {
   //   return `This action updates a #${id} user`;
   // }
 }

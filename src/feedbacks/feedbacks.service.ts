@@ -8,7 +8,7 @@ export class FeedbackService {
     return 'this route returns all feedbacks';
   }
 
-  findFeedBack(id: number) {
+  findFeedBack(id: number | string) {
     return `This action returns a #${id} feedback`;
   }
 
@@ -16,11 +16,11 @@ export class FeedbackService {
     return 'This action adds a new feedback';
   }
 
-  update(id: number, updateFeedbackDto: UpdateFeedBackDto) {
+  update(id: number | string, updateFeedbackDto: UpdateFeedBackDto) {
     return `This action updates a #${id} feedback`;
   }
 
-  delete(id: number) {
+  delete(id: number | string) {
     return `This action removes a #${id} feedback`;
   }
 }

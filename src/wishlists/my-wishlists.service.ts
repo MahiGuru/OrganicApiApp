@@ -38,7 +38,7 @@ export class MyWishlistService {
     };
   }
 
-  findAMyWishlist(id: number) {
+  findAMyWishlist(id: number | string | string) {
     return this.wishlist.find((p) => p.id === id);
   }
 
@@ -46,11 +46,11 @@ export class MyWishlistService {
     return this.wishlist[0];
   }
 
-  update(id: number, updateWishlistDto: UpdateWishlistDto) {
+  update(id: number | string, updateWishlistDto: UpdateWishlistDto) {
     return this.wishlist[0];
   }
 
-  delete(id: number) {
+  delete(id: number | string) {
     return this.wishlist[0];
   }
 }

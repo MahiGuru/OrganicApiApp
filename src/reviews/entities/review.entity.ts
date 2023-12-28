@@ -21,8 +21,8 @@ export class Review extends CoreEntity {
   my_feedback: Feedback;
   positive_feedbacks_count: number;
   negative_feedbacks_count: number;
-  user_id: number;
-  product_id: number;
+  user_id: number | string;
+  product_id: number | string;
   abusive_reports: Report[];
   shop_id: string;
   variation_option_id: string;

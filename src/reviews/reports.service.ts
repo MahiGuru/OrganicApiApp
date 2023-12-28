@@ -8,7 +8,7 @@ export class AbusiveReportService {
     return 'this route returns all abusive report';
   }
 
-  findReport(id: number) {
+  findReport(id: number | string) {
     return `This action returns a #${id} report`;
   }
 
@@ -16,11 +16,11 @@ export class AbusiveReportService {
     return 'This action adds a new report';
   }
 
-  update(id: number, updateReportDto: UpdateReportDto) {
+  update(id: number | string, updateReportDto: UpdateReportDto) {
     return `This action updates a #${id} report`;
   }
 
-  delete(id: number) {
+  delete(id: number | string) {
     return `This action removes a #${id} report`;
   }
 }

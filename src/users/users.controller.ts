@@ -45,12 +45,12 @@ export class UsersController {
   }
 
   @Post('unblock-user')
-  activeUser(@Body('id') id: number) {
+  activeUser(@Body('id') id: number | string) {
     return this.usersService.activeUser(+id);
   }
 
   @Post('block-user')
-  banUser(@Body('id') id: number) {
+  banUser(@Body('id') id: number | string) {
     return this.usersService.banUser(+id);
   }
 
@@ -77,7 +77,7 @@ export class ProfilesController {
   }
 
   @Delete(':id')
-  deleteProfile(@Param('id') id: number) {
+  deleteProfile(@Param('id') id: number | string) {
     return this.usersService.remove(id);
   }
 }

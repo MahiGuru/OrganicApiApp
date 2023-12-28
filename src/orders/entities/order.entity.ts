@@ -42,7 +42,7 @@ export enum PaymentStatusType {
 
 export class Order extends CoreEntity {
   tracking_number: string;
-  customer_id: number;
+  customer_id: number | string;
   customer_contact: string;
   customer: User;
   parent_order?: Order;
@@ -72,9 +72,9 @@ export class Order extends CoreEntity {
 
 export class OrderFiles extends CoreEntity {
   purchase_key: string;
-  digital_file_id: number;
+  digital_file_id: number | string;
   order_id?: number;
-  customer_id: number;
+  customer_id: number | string;
   file: File;
   fileable: Product;
 }

@@ -41,6 +41,8 @@ export enum PaymentStatusType {
   AWAITING_FOR_APPROVAL = 'payment-awaiting-for-approval',
   DEFAULT_PAYMENT_STATUS = 'payment-pending',
 }
+
+
 @Schema()
 export class Order extends CoreEntitySchema {
   @Prop()
@@ -52,16 +54,16 @@ export class Order extends CoreEntitySchema {
   @Prop()
   customer_contact: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
   customer: User;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Order' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Order.name })
   parent_order?: Order;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Order.name }] })
   children: Order[];
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'OrderStatus' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: OrderStatus.name })
   status: OrderStatus;
 
   @Prop()
@@ -85,10 +87,10 @@ export class Order extends CoreEntitySchema {
   @Prop()
   payment_gateway: PaymentGatewayType;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Coupon' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Coupon.name })
   coupon?: Coupon;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Shop' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Shop.name })
   shop: Shop;
   
   @Prop()
@@ -100,13 +102,13 @@ export class Order extends CoreEntitySchema {
   @Prop()
   delivery_time: string;
   
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Product.name }] })
   products: Product[];
   
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserAddress' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: UserAddress.name })
   billing_address: UserAddress;
   
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserAddress' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: UserAddress.name })
   shipping_address: UserAddress;
   
   @Prop()
@@ -122,7 +124,9 @@ export class Order extends CoreEntitySchema {
   altered_payment_gateway?: string;
 }
 
-@Schema()
+export const OrderSchema = SchemaFactory.createForClass(Order);
+
+@Schema({_id: false})
 export class OrderFiles extends CoreEntitySchema {
   @Prop()
   purchase_key: string;
@@ -132,13 +136,10 @@ export class OrderFiles extends CoreEntitySchema {
   order_id?: number;
   @Prop()
   customer_id: number;
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'File' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: File.name })
   file: File;
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Product' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Product.name })
   fileable: Product;
-}
-export type OrderDocument = HydratedDocument<Order>;
-export type OrderFilesDocument = HydratedDocument<OrderFiles>;
+} 
 
-export const OrderSchema = SchemaFactory.createForClass(Order);
 export const OrderFilesSchema = SchemaFactory.createForClass(OrderFiles);

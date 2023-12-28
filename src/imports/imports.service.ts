@@ -11,11 +11,11 @@ export class ImportsService {
     return `This action returns all imports`;
   }
 
-  findOne(id: number) {
+  findOne(id: number | string) {
     return `This action returns a #${id} import`;
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} import`;
   }
 }

@@ -22,7 +22,7 @@ export class FeedbackController {
 
   // get single feedback
   @Get(':id')
-  find(@Param('id') id: number) {
+  find(@Param('id') id: number | string) {
     return this.feedbackService.findFeedBack(id);
   }
 

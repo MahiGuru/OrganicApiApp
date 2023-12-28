@@ -9,7 +9,7 @@ export class LatestMessage extends CoreEntity {
 }
 
 export class Conversation extends CoreEntity {
-  shop_id: number;
+  shop_id: number | string;
   unseen: boolean;
   user_id: string;
   user: User;

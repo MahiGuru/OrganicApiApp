@@ -19,7 +19,7 @@ export class LatestMessage extends CoreEntitySchema {
 export class Conversation extends CoreEntitySchema {
   
   @Prop()
-  shop_id: number;
+  shop_id: number | string;
   
   @Prop()
   unseen: boolean;

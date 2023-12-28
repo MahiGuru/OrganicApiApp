@@ -57,7 +57,7 @@ export class AuthorsService {
     return this.authors.slice(0, limit);
   }
 
-  update(id: number, updateAuthorDto: UpdateAuthorDto) {
+  update(id: number | string, updateAuthorDto: UpdateAuthorDto) {
     const author = this.authors.find((p) => p.id === String(id));
 
     // Update author
@@ -66,7 +66,7 @@ export class AuthorsService {
     return author;
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} product`;
   }
 }

@@ -9,11 +9,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema()
 export class Question extends CoreEntitySchema {
   @Prop()
-  user_id: number;
+  user_id: number | string;
   @Prop()
-  product_id: number;
+  product_id: number | string;
   @Prop()
-  shop_id: number;
+  shop_id: number | string;
   @Prop()
   question?: string;
   @Prop()

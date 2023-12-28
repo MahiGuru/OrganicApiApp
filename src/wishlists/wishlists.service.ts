@@ -46,7 +46,7 @@ export class WishlistsService {
     };
   }
 
-  findWishlist(id: number) {
+  findWishlist(id: string | number) {
     return this.wishlist.find((p) => p.id === id);
   }
 
@@ -54,22 +54,22 @@ export class WishlistsService {
     return this.wishlist[0];
   }
 
-  update(id: number, updateWishlistDto: UpdateWishlistDto) {
+  update(id: number | string, updateWishlistDto: UpdateWishlistDto) {
     return this.wishlist[0];
   }
 
-  delete(id: number) {
+  delete(id: number | string) {
     return this.wishlist[0];
   }
 
-  isInWishlist(product_id: number) {
-    const product = this.products.find((p) => p.id === Number(product_id));
+  isInWishlist(product_id: string) {
+    const product = this.products.find((p) => p.id === (product_id));
 
     return product?.in_wishlist;
   }
 
   toggle({ product_id }: CreateWishlistDto) {
-    const product = this.products.find((p) => p.id === Number(product_id));
+    const product = this.products.find((p) => p.id === (product_id));
 
     product.in_wishlist = !product?.in_wishlist;
 

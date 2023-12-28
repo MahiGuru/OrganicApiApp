@@ -59,14 +59,14 @@ export class StoreNoticesService {
   }
 
   getStoreNotice(param: string, language: string) {
-    return this.storeNotices.find((p) => p.id === Number(param));
+    return this.storeNotices.find((p) => p.id === (param));
   }
 
-  update(id: number, updateStoreNoticeDto: UpdateStoreNoticeDto) {
+  update(id: number | string, updateStoreNoticeDto: UpdateStoreNoticeDto) {
     return this.storeNotices[0];
   }
 
-  remove(id: number) {
+  remove(id: number | string) {
     return `This action removes a #${id} store notice`;
   }
 }

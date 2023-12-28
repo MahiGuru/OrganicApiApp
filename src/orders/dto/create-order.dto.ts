@@ -32,7 +32,7 @@ export class UserAddressInput {
 }
 
 export class ConnectProductOrderPivot {
-  product_id: number;
+  product_id: number | string;
   variation_option_id?: number;
   order_quantity: number;
   unit_price: number;

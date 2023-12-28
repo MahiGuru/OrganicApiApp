@@ -13,7 +13,7 @@ export class Report extends CoreEntitySchema {
   user: User[];
   
   @Prop()
-  model_id: number;
+  model_id: number | string;
   
   @Prop()
   model_type: string;

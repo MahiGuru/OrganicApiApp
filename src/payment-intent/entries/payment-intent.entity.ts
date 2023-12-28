@@ -1,6 +1,6 @@
 export class PaymentIntent {
-  id: number;
-  order_id: number;
+  id: number | string;
+  order_id: number | string;
   tracking_number: string;
   payment_gateway: string;
   payment_intent_info: PaymentIntentInfo;
